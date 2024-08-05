@@ -8,5 +8,6 @@ export interface ITweet {
         username: string;
         email: string;
         avatar: string | null
-    }
+    };
+    isLike: boolean
 }

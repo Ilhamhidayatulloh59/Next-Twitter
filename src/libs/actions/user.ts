@@ -1,4 +1,5 @@
-import { UserInput, UserLogin } from "@/types/user"
+import { UserInput, UserLogin, UserState } from "@/types/user"
+import { getCookie } from "./server"
 
 export const registerUser = async (data: UserInput) => {
     const res = await fetch('http://localhost:2000/api/auth', {
@@ -22,5 +23,21 @@ export const loginUser = async (data: UserLogin) => {
     })
     const response = await res.json()
 
+    return { result: response, ok: res.ok }
+}
+
+export const getActiveUser = async () => {
+    const token = await getCookie('token')
+    interface Response {
+        status: string;
+        users: UserState[]
+    }
+    const res = await fetch('http://localhost:2000/api/users/active', {
+        headers: {
+            "Authorization": `Bearer ${token?.value}`
+        },
+        next: { revalidate: 60 }
+    })
+    const response: Response = await res.json()
     return { result: response, ok: res.ok }
 }

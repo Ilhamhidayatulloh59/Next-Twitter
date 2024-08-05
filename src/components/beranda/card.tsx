@@ -1,11 +1,11 @@
 import Link from "next/link"
 import { FaRegComment } from "react-icons/fa6";
-import { CiHeart } from "react-icons/ci";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { IoStatsChartOutline } from "react-icons/io5";
 import { IconOption } from "./icon";
 import { ITweet } from "@/types/tweet";
 import formatDate from "@/utils/formatDate";
+import { LikeIcon } from "./likeIcon";
 
 export const CardTweet = ({ data }: { data: ITweet }) => {
     const src = data.user.avatar || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
@@ -31,7 +31,7 @@ export const CardTweet = ({ data }: { data: ITweet }) => {
                 <div className="flex px-2 justify-between">
                     <IconOption color="blue" Icon={FaRegComment} />
                     <IconOption color="green" Icon={AiOutlineRetweet} />
-                    <IconOption color="pink" Icon={CiHeart} />
+                    <LikeIcon item={data} />
                     <IconOption color="blue" Icon={IoStatsChartOutline} />
                 </div>
             </div>
