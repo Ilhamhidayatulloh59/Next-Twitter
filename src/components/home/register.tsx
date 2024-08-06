@@ -16,6 +16,7 @@ const initialValues: UserInput = {
 
 export const RegisterModal = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -27,12 +28,15 @@ export const RegisterModal = () => {
 
     const onRegister = async (data: UserInput) => {
         try {
+            setLoading(true)
             const res = await registerUser(data)
             if (res.status == "error") throw res.msg
             toast.info(res.msg)
+            setLoading(false)
         } catch (err) {
             toast.error(err as string)
             console.log(err);
+            setLoading(false)
         }
     }
 
@@ -61,8 +65,8 @@ export const RegisterModal = () => {
                                         <Input name="email" type="email" placeholder="Email" />
                                         <Input name="password" type="password" placeholder="Password" />
                                     </div>
-                                    <button type="submit" className="bg-gray-100 btn w-full text-lg font-bold rounded-full flex justify-center gap-3">
-                                        Daftar
+                                    <button disabled={loading} type="submit" className="bg-gray-100 btn w-full text-lg font-bold disabled:bg-gray-200 rounded-full flex justify-center gap-3">
+                                        { loading ? "Loading .." : "Daftar" }
                                     </button>
                                 </Form>
                             )
