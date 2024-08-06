@@ -6,6 +6,7 @@ import { IconOption } from "./icon";
 import { ITweet } from "@/types/tweet";
 import formatDate from "@/utils/formatDate";
 import { LikeIcon } from "./likeIcon";
+import Image from "next/image";
 
 export const CardTweet = ({ data }: { data: ITweet }) => {
     const src = data.user.avatar || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
@@ -28,6 +29,11 @@ export const CardTweet = ({ data }: { data: ITweet }) => {
                     <span className="text-gray-500">{formatDate(data.createdAt)}</span>
                 </div>
                 <div className="px-2">{data.content}</div>
+                { data.media && 
+                    <div>
+                        <Image src={data.media} className="rounded-xl mt-2" width={500} height={500} alt="media" />
+                    </div>
+                }
                 <div className="flex px-2 justify-between">
                     <IconOption color="blue" Icon={FaRegComment} />
                     <IconOption color="green" Icon={AiOutlineRetweet} />

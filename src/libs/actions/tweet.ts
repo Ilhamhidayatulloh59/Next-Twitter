@@ -21,13 +21,17 @@ export const getTweet = async () => {
 
 export const createTweet = async (data: CreateTweet) => {
     const token = await getCookie('token')
+    
+    const formData = new FormData()
+    formData.append('content', data.content)
+    formData.append('media', data.media as File || null)
+
     const res = await fetch(`http://localhost:2000/api/tweets`, {
         headers: {
-            "Content-Type": "application/json",
             "Authorization": `Bearer ${token?.value}`
         },
         method: "POST",
-        body: JSON.stringify(data)
+        body: formData
     })
     const response = await res.json()
 

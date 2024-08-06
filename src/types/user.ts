@@ -10,6 +10,7 @@ export interface UserLogin {
 }
 export interface CreateTweet {
     content: string;
+    media?: File | null;
 }
 
 export interface UserState {
