@@ -8,7 +8,7 @@ export const getTweet = async () => {
         status: string;
         tweets: ITweet[]
     }
-    const res = await fetch('http://localhost:2000/api/tweets', {
+    const res = await fetch('https://twitter-be-tau.vercel.app/api/tweets', {
         headers: {
             "Authorization": `Bearer ${token?.value}`
         },
@@ -21,12 +21,12 @@ export const getTweet = async () => {
 
 export const createTweet = async (data: CreateTweet) => {
     const token = await getCookie('token')
-    
+
     const formData = new FormData()
     formData.append('content', data.content)
     formData.append('media', data.media as File || null)
 
-    const res = await fetch(`http://localhost:2000/api/tweets`, {
+    const res = await fetch(`https://twitter-be-tau.vercel.app/api/tweets`, {
         headers: {
             "Authorization": `Bearer ${token?.value}`
         },
@@ -40,7 +40,7 @@ export const createTweet = async (data: CreateTweet) => {
 
 export const likeTweet = async (tweetId: number) => {
     const token = await getCookie('token')
-    const res = await fetch(`http://localhost:2000/api/tweets/like/${tweetId}`, {
+    const res = await fetch(`https://twitter-be-tau.vercel.app/api/tweets/like/${tweetId}`, {
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token?.value}`

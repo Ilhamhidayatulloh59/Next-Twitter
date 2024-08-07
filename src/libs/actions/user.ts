@@ -2,7 +2,7 @@ import { UserInput, UserLogin, UserState } from "@/types/user"
 import { getCookie } from "./server"
 
 export const registerUser = async (data: UserInput) => {
-    const res = await fetch('http://localhost:2000/api/auth', {
+    const res = await fetch('https://twitter-be-tau.vercel.app/api/auth', {
         headers: {
             "Content-Type": "application/json"
         },
@@ -14,7 +14,7 @@ export const registerUser = async (data: UserInput) => {
 }
 
 export const loginUser = async (data: UserLogin) => {
-    const res = await fetch('http://localhost:2000/api/auth/login', {
+    const res = await fetch('https://twitter-be-tau.vercel.app/api/auth/login', {
         headers: {
             "Content-Type": "application/json"
         },
@@ -32,7 +32,7 @@ export const getActiveUser = async () => {
         status: string;
         users: UserState[]
     }
-    const res = await fetch('http://localhost:2000/api/users/active', {
+    const res = await fetch('https://twitter-be-tau.vercel.app/api/users/active', {
         headers: {
             "Authorization": `Bearer ${token?.value}`
         },
@@ -43,7 +43,7 @@ export const getActiveUser = async () => {
 }
 
 export const verifyUser = async (token: string) => {
-    const res = await fetch('http://localhost:2000/api/auth/verify', {
+    const res = await fetch('https://twitter-be-tau.vercel.app/api/auth/verify', {
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
