@@ -1,3 +1,4 @@
+import { splitStr } from "@/utils/splitStr"
 import { Avatar } from "../Avatar"
 import { UserState } from "@/types/user"
 
@@ -11,7 +12,7 @@ export const CardFollow = ({ data }: { data: UserState }) => {
                 <Avatar src={src} alt={data.username} />
                 <div className="hidden md:block">
                     <p>{data.username}</p>
-                    <p className="text-[14px]">{data.email}</p>
+                    <p className="text-[14px]">{splitStr(data.email, 15)}</p>
                 </div>
             </div>
             <button className="text-[10px] font-bold text-black bg-white py-1 px-2 rounded-full">
